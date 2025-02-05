@@ -1,0 +1,29 @@
+/* bugSolution.css */
+
+/* Solution to Negative Width Problem */
+.container {
+  width: 200px;
+}
+
+.element {
+  width: calc(100% - 200px);
+  /* This will still result in 0, a better solution would involve fallback */
+  width: max(0, calc(100% - 200px)); /* fallback to 0 if negative */
+}
+
+/* Solution to Inconsistent Unit Problem - Use consistent units */
+.element2 {
+  width: calc(100% + 20px); /* Now uses pixel for width and the addition makes sense*/
+}
+
+/* Alternative solution using media query - handling small containers */
+@media (max-width: 200px) {
+  .element {
+    width: 100%; /* Use 100% width when the container is small */
+  }
+}
+
+/* Better Solution Using Clamp()  (CSS Clamp requires support check):*/
+.element3 {
+  width: clamp(0, calc(100% - 200px), 100%); /*  Ensures a minimum of 0, but will not exceed 100%*/
+} 
